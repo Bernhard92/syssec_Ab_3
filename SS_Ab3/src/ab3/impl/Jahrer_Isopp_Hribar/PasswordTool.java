@@ -24,6 +24,7 @@ public class PasswordTool implements PasswordTools {
 				
 		MessageDigest messageDigest;
 		try {
+			//concatenate the salt to the password and hash them 
 			password += Arrays.toString(salt); 
 			messageDigest = MessageDigest.getInstance(algorithm);
 			messageDigest.update(password.getBytes());
@@ -46,12 +47,13 @@ public class PasswordTool implements PasswordTools {
 		//hLen is the length of the pseudo random fuction in octets 
 		int hLen = 160/8; 
 		
-		
+		//check if there are input errors
 		if (dkLen < 1 || password == null || salt == null || iterations < 1 || 
 				//dkLen must be smaller then 2^32-1 * hlen
 				dkLen < (Integer.MAX_VALUE * hLen)) 
 			return null;
 			
+		//check if the min key length is correct 
 		if (dkLen < 20) 
 			dkLen = 20; 
 		
@@ -157,6 +159,7 @@ public class PasswordTool implements PasswordTools {
 		byte[] longRandom = s.toByteArray(); 
 		byte[] random = new byte[len]; 
 		
+		//return only the first 'len' values
 		for (int i = 0; i < len; i++) {
 			random[i] = longRandom[i]; 
 		}

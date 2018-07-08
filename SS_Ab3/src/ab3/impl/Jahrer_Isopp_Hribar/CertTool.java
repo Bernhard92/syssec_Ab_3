@@ -137,10 +137,11 @@ public class CertTool implements CertTools{
 	
 	private String getSHAFingerprint(int cert, String shaVersion) {
 		try {
+			//uses given hash algorithm to calculate the fingerprint
 			MessageDigest messageDigest = MessageDigest.getInstance(shaVersion);
 			messageDigest.update(certificates[cert].getEncoded());
 			byte[] sha = messageDigest.digest(); 
-			 
+			//translates the fingerprint to HEX
 			StringBuilder stringBuilder = new StringBuilder(); 
 			for (byte b : sha) {
 				stringBuilder.append(String.format("%02x", b)); 
