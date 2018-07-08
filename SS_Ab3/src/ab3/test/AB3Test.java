@@ -114,7 +114,6 @@ public class AB3Test {
     @Test
     public void BBS() {
 	byte[] data = pwdTools.generateRandomBytes(10, 256);
-	System.out.println(Arrays.toString(data));
 	Assert.assertEquals(10, data.length);
 
 	pts+=3;
@@ -311,15 +310,16 @@ public class AB3Test {
     public void checkPBKDF2TestOne() {
 	// Testfall 1 von https://tools.ietf.org/html/rfc6070;
 
-	Assert.assertArrayEquals(pwdTools.PBKDF2("password".getBytes(), "salt".getBytes(), 1, 20),
+    System.out.println(Arrays.toString(pwdTools.PBKDF2("password".getBytes(), "salt".getBytes(), 1, 20)));
+    Assert.assertArrayEquals(pwdTools.PBKDF2("password".getBytes(), "salt".getBytes(), 1, 20),
 		new byte[] { 12, 96, -56, 15, -106, 31, 14, 113, -13, -87, -75, 36, -81, 96, 18, 6, 47, -32, 55, -90 });
     }
 
     public void checkPBKDF2TestTwo() {
 	// Testfall 2 von https://tools.ietf.org/html/rfc6070;
 
-	Assert.assertArrayEquals(pwdTools.PBKDF2("password".getBytes(), "salt".getBytes(), 2, 20), new byte[] { -22, 108,
-		1, 77, -57, 45, 111, -116, -51, 30, -39, 42, -50, 29, 65, -16, -40, -34, -119, 87 });
+	Assert.assertArrayEquals(pwdTools.PBKDF2("password".getBytes(), "salt".getBytes(), 2, 20),
+		new byte[] { -22, 108, 1, 77, -57, 45, 111, -116, -51, 30, -39, 42, -50, 29, 65, -16, -40, -34, -119, 87 });
     }
 
     public void checkPBKDF2TestThree() {
